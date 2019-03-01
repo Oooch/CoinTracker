@@ -87,6 +87,11 @@ namespace CoinTracker.Controllers
             return View();
         }
 
+        public IActionResult LoadData()
+        {
+
+        }
+
         // GET: Coins/Create
         //public IActionResult Create()
         //{

@@ -7,35 +7,57 @@
 <h1>Aaron's Coin Tracker</h1>
 
 <form asp-action="Index" method="get">
-<div class="form-actions no-color">
-    <p>
-        Search Pair: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
-        <input type="submit" value="Search" class="btn btn-default"/> | <a asp-action="Index">Back to Full List</a>
-    </p>
-</div>
+    <div class="form-actions no-color">
+        <p>
+            Search Pair: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> | <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
 </form>
 
-@section Scripts{ 
-
-}
+<div class="container">
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-6">&nbsp;</div>
+        <div class="col-6">
+            User:<input type="text" id="userInput" />
+            <br />
+            Message:<input type="text" id="messageInput" />
+            <input type="button" id="sendButton" value="Send Message" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">&nbsp;</div>
+        <div class="col-6">
+            <ul id="messagesList"></ul>
+        </div>
+    </div>
+</div>
+<script src="~/lib/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>
 
 <table class="table">
     <thead>
         <tr>
-            <th>     
+            <th>
                 @Html.DisplayNameFor(model => model.Exchange)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["PairSortParam"]">@Html.DisplayNameFor(model => model.Pair)</a>                
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["PairSortParam"]">@Html.DisplayNameFor(model => model.Pair)</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CurrentPrice)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["ChangeSortParam"]">@Html.DisplayNameFor(model => model.PriceChange)</a>                
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ChangeSortParam"]">@Html.DisplayNameFor(model => model.PriceChange)</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["VolumeSortParam"]">@Html.DisplayNameFor(model => model.Volume)</a>                
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["VolumeSortParam"]">@Html.DisplayNameFor(model => model.Volume)</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.LastUpdated)
@@ -44,27 +66,28 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Exchange)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pair)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CurrentPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PriceChange)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Volume)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastUpdated)
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Exchange)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pair)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CurrentPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PriceChange)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Volume)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastUpdated)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using CoinTracker.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using CoinTracker.Hubs;
 
 namespace CoinTracker
 {
@@ -44,6 +45,8 @@ namespace CoinTracker
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.AddSignalR();
+
             services.AddHostedService<TimedHostedService>();
         }
 
@@ -67,6 +70,10 @@ namespace CoinTracker
             app.UseCookiePolicy();
 
             app.UseAuthentication();
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<ChatHub>("/chatHub");
+            });
 
             app.UseMvc(routes =>
             {
